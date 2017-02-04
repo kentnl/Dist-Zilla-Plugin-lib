@@ -31,4 +31,9 @@ $plugin and (
     };
   }
 );
+
+if ( $ENV{AUTOMATED_TESTING} || $ENV{TRAVIS} ) {
+  diag $_ for @{ $tzil->log_messages };
+}
+
 done_testing;
