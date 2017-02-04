@@ -1,0 +1,155 @@
+# NAME
+
+Dist::Zilla::Plugin::lib - A simpler bootstrap for a more civilised world
+
+# VERSION
+
+version 0.001000
+
+# SYNOPSIS
+
+    name = My-Dist
+    ...
+
+    [lib]
+    lib = inc
+
+    [Foo]
+
+Foo will now be sourced from ./inc
+
+# DESCRIPTION
+
+Dist::Zilla::Plugin::lib serves as a relatively straight-forward and
+uncomplicated way to wire certain local paths in your distributions
+source tree into Perl's `@INC` library load path.
+
+Its primary audiences are twofold.
+
+- Self-Building Dist::Zilla Plugins
+
+    Many recent [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla) plugin workflows champion a
+    state of `lib/` which are usable "as is" without needing to cycle
+    through a `dzil build` phase first, and this plugin offers a simple
+    way to stash `lib/` in `@INC` without needing to pass `-Ilib` every
+    time you run `dzil`.
+
+    Workflows that require a build cycle to self-build should use
+    [`[Bootstrap::lib]`](https://metacpan.org/pod/Dist::Zilla::Plugin::Bootstrap::lib) instead.
+
+- Bundled Dist::Zilla Plugins
+
+    Many heavy `CPAN` distributions have bundled within them custom `Dist::Zilla`
+    plugins stashed in `inc/`
+
+    Traditionally, these are loaded via `[=inc::Foo::Package]` exploiting
+    the long held assumption that `"."` ( `$CWD` ) is contained in `@INC`
+
+    However, that is becoming a less safe assumption, and this plugin
+    aims to make such equivalent behaviour practical without needing to rely
+    on that assumption.
+
+# USAGE
+
+Inserting a section in your `dist.ini` as follows:
+
+    [lib]
+    lib = some/path
+
+    [=Some::Plugin]
+
+    [Some::Other::Plugin]
+
+Will prepend `some/path` (relative to your distribution root) into
+`@INC`, and allow loading of not just plugins, but plugin dependencies
+from the designated path.
+
+`[=Some::Plugin]` will be able to load, as per existing `Dist::Zilla` convention,
+via `inc/Some/Plugin.pm`, and then fall back to searching other `@INC` paths.
+
+`[Some::Other::Plugin]` will **also** be able to load from `inc/`,
+via `inc/Dist/Zilla/Plugin/Some/Other/Plugin.pm`
+
+# Ensuring dot-in-INC
+
+Its not sure when `"."` in `@INC` will actually go away, or which parts of the `dzil`
+ecosystem will be re-patched to retain this assumption.
+
+But the simplest thing that would work with changing the least amount of code would be
+simply inserting
+
+    [lib]
+    lib = .
+
+Early in your `dist.ini`
+
+This will have a `mostly` the same effect as retaining `dot-in-INC` even in the
+event you run on a newer Perl where that is removed by default.
+
+The differences however are subtle and maybe better depending on what you're doing
+
+- `"."` will be prepended to `@INC`, not appended.
+
+    This means `[=inc::Foo]` will actually hit `inc/` first, not simply as an afterthought
+    if it isn't found in other paths in `@INC`
+
+    For instance, currently, I could create a lot of havoc by simply shipping a `dzil` plugin with
+    the same name as somebody already is using for their private `inc/` hacks, and then trip them
+    into installing it. Because currently, `site beats "."` where authors intended to source
+    from `"."` not `site`
+
+- `"."` will be absolutized to `$zilla->root`
+
+    As it stands, the `"."` in `@INC` is only ever `"."`, which means calling
+    `chdir` between calls to `require` effectively changes what `@INC` means.
+
+    Given that is the specific threat surface for that issue, it would be silly
+    to repeat that mistake, especially as when you write `"."` you typically want to
+    imply "Where I am now" not "Wherever the code will be 30 seconds after now after
+    it `chdir`s to random locations at the discretion of code I haven't even read"
+
+    There's still some annoying scope for this absolutization going wrong,
+    due to `Dist::Zilla` not [ensuring this path is fixed early on](https://github.com/rjbs/Dist-Zilla/issues/579)
+    but `[lib]` fixes and absolutizes it as early as possible,
+    with the hope we'll know what you meant by `cwd` before somebody can change `cwd`
+
+    ( And if that fails, it will fail spectacularly, not selectively work some of the
+    time if your stars align )
+
+# Migrating from dot-in-INC code
+
+If you have existing code that relies on the `.`-in-`@INC` assumption,
+migrating to use this plugin in way that would seem "proper" would play as follows:
+
+- 1. Rename your plugins in `inc/`
+
+    All those packages called `inc::Some::Plugin` become
+    `Some::Plugin`
+
+- 2. Replace your section lines
+
+    `inc` is no longer needed as part of the plugin, so
+    replacing all sections
+
+        -[=inc::Some::Plugin]
+        +[=Some::Plugin]
+
+    In line with step 1.
+
+- 3. Add a `[lib]` section before all your plugins
+
+    And tell it to assume that `inc/` is now in the load path.
+
+        +[lib]
+        +lib = inc
+
+# AUTHOR
+
+Kent Fredric <kentnl@cpan.org>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2017 by Kent Fredric <kentfredric@gmail.com>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
