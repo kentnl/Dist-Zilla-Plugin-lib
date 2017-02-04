@@ -31,4 +31,10 @@ $plugin and (
     };
   }
 );
+
+$plugin and isnt( $INC[0], '.', "Path injected in \@INC should not be a literal q[.]" ) or do {
+  diag "All \@INC + is_absolute state";
+  diag $_ for map { "- $_ => " . ( ref $_ ? 'ref' : path($_)->is_absolute ? 'abs' : 'rel' ) } @INC;
+};
+
 done_testing;
