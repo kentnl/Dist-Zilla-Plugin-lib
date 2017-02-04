@@ -11,14 +11,22 @@ our $VERSION = '0.001000';
 # AUTHORITY
 
 use Moose qw( with around has );
+use MooseX::Types::Moose qw( ArrayRef Str );
 use Path::Tiny qw( path );
 use lib qw();
 
 with 'Dist::Zilla::Role::Plugin';
 
+
+=for Pod::Coverage mvp_multivalue_args
+
+=cut
+
+sub mvp_multivalue_args { return qw( lib ) }
+
 has 'lib' => (
   is       => 'ro',
-  isa      => 'Str',
+  isa      => ArrayRef [Str],
   required => 1,
 );
 
@@ -39,13 +47,14 @@ around dump_config => sub {
 around plugin_from_config => sub {
   my ( $orig, $plugin_class, $name, $payload, $section ) = @_;
   my $instance = $plugin_class->$orig( $name, $payload, $section );
-  my $root = path( $instance->zilla->root )->absolute; # https://github.com/rjbs/Dist-Zilla/issues/579
-  my $libpath = path( $instance->lib )->absolute( $root );
-
+  my $root = path( $instance->zilla->root )->absolute;    # https://github.com/rjbs/Dist-Zilla/issues/579
   $instance->log_debug("zilla root: $root");
-  $instance->log_debug("Prepending \"$libpath\" to \@INC");
-  $libpath->is_dir or $instance->log("library path \"${libpath}\" does not exist or is not a directory");
-  lib->import( "$libpath" );
+
+  lib->import(
+    map { "$_" }
+    grep { $_->is_dir ? 1 : ( $instance->log("library path \"$_\" does not exist or is not a directory"), undef ) }
+    map { path($_)->absolute($root) } @{ $instance->lib || [] },
+  );
   $instance->log_debug("\@INC is [@INC]");
   return $instance;
 };
