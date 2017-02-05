@@ -130,7 +130,7 @@
    "provides" : {
       "Dist::Zilla::Plugin::lib" : {
          "file" : "lib/Dist/Zilla/Plugin/lib.pm",
-         "version" : "0.001000"
+         "version" : "0.001001"
       }
    },
    "release_status" : "stable",
@@ -145,7 +145,7 @@
          "web" : "https://github.com/kentnl/Dist-Zilla-Plugin-lib"
       }
    },
-   "version" : "0.001000",
+   "version" : "0.001001",
    "x_BuiltWith" : {
       "external_file" : "misc/built_with.json"
    },
@@ -665,7 +665,7 @@
                   "branch" : null,
                   "changelog" : "Changes",
                   "signed" : 0,
-                  "tag" : "0.001000-source",
+                  "tag" : "0.001001-source",
                   "tag_format" : "%v-source",
                   "tag_message" : "v%v"
                },
@@ -756,7 +756,7 @@
                   "branch" : "releases",
                   "changelog" : "Changes",
                   "signed" : 0,
-                  "tag" : "0.001000",
+                  "tag" : "0.001001",
                   "tag_format" : "%v",
                   "tag_message" : "v%v"
                },
