@@ -103,6 +103,7 @@
          "requires" : {
             "Dist::Zilla::Role::Plugin" : "0",
             "Moose" : "0",
+            "MooseX::Types::Moose" : "0",
             "Path::Tiny" : "0",
             "lib" : "0",
             "perl" : "5.006",
@@ -119,7 +120,9 @@
          "requires" : {
             "ExtUtils::MakeMaker" : "0",
             "File::Spec" : "0",
+            "Test::DZil" : "0",
             "Test::More" : "0.89",
+            "constant" : "0",
             "perl" : "5.006"
          }
       }
@@ -131,6 +134,17 @@
       }
    },
    "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/kentnl/Dist-Zilla-Plugin-lib/issues"
+      },
+      "homepage" : "https://github.com/kentnl/Dist-Zilla-Plugin-lib",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/kentnl/Dist-Zilla-Plugin-lib.git",
+         "web" : "https://github.com/kentnl/Dist-Zilla-Plugin-lib"
+      }
+   },
    "version" : "0.001000",
    "x_BuiltWith" : {
       "external_file" : "misc/built_with.json"
