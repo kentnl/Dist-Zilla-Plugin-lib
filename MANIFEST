@@ -21,6 +21,10 @@ examples/inc-lib/.gitignore
 examples/inc-lib/dist.ini
 examples/inc-lib/inc/Bundled/Plugin.pm
 examples/inc-lib/lib/Example/Inc/in/INC.pm
+examples/multi-lib/.gitignore
+examples/multi-lib/dist.ini
+examples/multi-lib/inc/Bundled/Plugin.pm
+examples/multi-lib/lib/Example/Self/Build.pm
 examples/self-build/.gitignore
 examples/self-build/dist.ini
 examples/self-build/lib/Example/Self/Build.pm
@@ -39,6 +43,7 @@ t/00-report-prereqs.t
 t/01-basic.t
 t/02-assume-dot.t
 t/03-self-build.t
+t/04-multi-lib.t
 weaver.ini
 xt/author/critic.t
 xt/author/eol.t

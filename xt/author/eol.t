@@ -13,7 +13,8 @@ my @files = (
     't/00-report-prereqs.t',
     't/01-basic.t',
     't/02-assume-dot.t',
-    't/03-self-build.t'
+    't/03-self-build.t',
+    't/04-multi-lib.t'
 );
 
 eol_unix_ok($_, { trailing_whitespace => 1 }) foreach @files;
