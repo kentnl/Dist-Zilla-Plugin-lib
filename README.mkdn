@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::lib - A simpler bootstrap for a more civilised world
 
 # VERSION
 
-version 0.001000
+version 0.001001
 
 # SYNOPSIS
 
