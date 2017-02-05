@@ -126,7 +126,7 @@ allow_includes = 1
 
 [Documentation::PodSpelling]
 spell_command = aspell list --lang en_GB
-stop_words = prepend prepended absolutized absolutization absolutizes
+stop_words = prepend prepended absolutized absolutization absolutizes absolutizing prepends
 
 [Documentation::ProhibitAdjacentLinks]
 

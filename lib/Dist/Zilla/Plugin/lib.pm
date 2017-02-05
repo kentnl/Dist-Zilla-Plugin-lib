@@ -229,6 +229,26 @@ And tell it to assume that C<inc/> is now in the load path.
 
 =back
 
+=head1 ATTRIBUTES
+
+=head2 C<lib>
+
+This attribute can be specified 1 or more times, each time specifying
+a path which will be assumed to be a path relative to C<< $zilla->root >>
+
+Paths specified will be passed to L<< C<lib.pm>|lib >>C<< ->import >> in the
+same order as they appear in your configuration, after absolutizing them.
+
+C<lib.pm> prepends the values to C<< @INC >> in a nature akin to
+
+  unshift(@INC, @{ $lib })
+
+Which is functionally similar to:
+
+  @INC = ( @{ $lib }, @INC )
+
+That is, retaining the specified order in C< @INC >.
+
 =head1 AUTHOR
 
 Kent Fredric <kentnl@cpan.org>
