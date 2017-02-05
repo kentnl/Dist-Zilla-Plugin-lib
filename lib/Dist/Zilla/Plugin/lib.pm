@@ -81,14 +81,16 @@ version 0.001001
 =head1 SYNOPSIS
 
   name = My-Dist
+  author = Mr CPAN Person <person@cpan.example.org>
+  license = Perl_5
   ...
 
+  ; push ./inc into @INC
   [lib]
   lib = inc
 
-  [Foo]
-
-Foo will now be sourced from ./inc
+  ; loads inc/My/GatherDir.pm
+  [=My::GatherDir]
 
 =head1 DESCRIPTION
 
