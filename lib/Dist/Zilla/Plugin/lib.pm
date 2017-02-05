@@ -107,9 +107,9 @@ plugins stashed in C<inc/>
 Traditionally, these are loaded via C<[=inc::Foo::Package]> exploiting
 the long held assumption that C<"."> ( C<$CWD> ) is contained in C<@INC>
 
-However, that is becoming a less safe assumption, and this plugin
-aims to make such equivalent behaviour practical without needing to rely
-on that assumption.
+However, that is becoming a L<less safe assumption|/RELATED READING>, and this
+plugin aims to make such equivalent behaviour practical without needing to
+rely on that assumption.
 
 =back
 
@@ -234,3 +234,15 @@ Which is functionally similar to:
   @INC = ( @{ $lib }, @INC )
 
 That is, retaining the specified order in C< @INC >.
+
+=head1 RELATED READING
+
+=head2 C<dot-in-INC>
+
+=over 4
+
+=item * L<< Todd Rinaldo - How removing C<"."> from C<@INC> is about to break CPAN|http://blogs.perl.org/users/todd_rinaldo/2016/11/how-removing-from-inc-is-about-to-break-cpan.html >>
+
+=item * L<< Todd Rinaldo - What happened to C<"."> in C<@INC>|http://blogs.perl.org/users/todd_rinaldo/2016/11/what-happened-to-dot-in-inc.html >>
+
+=back

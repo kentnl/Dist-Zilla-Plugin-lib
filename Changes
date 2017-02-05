@@ -2,6 +2,7 @@ Release history for Dist-Zilla-Plugin-lib
 
 {{$NEXT}}
  - Synopsis clarified
+ - Add a "related reading" section with links to dot-in-INC stuff
 
 0.001000 2017-02-05T11:27:57Z 6ef4630
  - First version.
