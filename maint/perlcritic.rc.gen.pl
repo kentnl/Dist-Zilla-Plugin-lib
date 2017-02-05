@@ -21,7 +21,7 @@ $bundle->configure;
 my @stopwords = (
   qw(
     prepend prepended absolutized absolutization absolutizes
-    absolutizing prepends
+    absolutizing prepends CPAN
     )
 );
 for my $wordlist (@stopwords) {
