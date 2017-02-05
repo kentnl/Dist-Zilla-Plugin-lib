@@ -143,6 +143,26 @@ migrating to use this plugin in way that would seem "proper" would play as follo
         +[lib]
         +lib = inc
 
+# ATTRIBUTES
+
+## `lib`
+
+This attribute can be specified 1 or more times, each time specifying
+a path which will be assumed to be a path relative to `$zilla->root`
+
+Paths specified will be passed to [`lib.pm`](https://metacpan.org/pod/lib)`->import` in the
+same order as they appear in your configuration, after absolutizing them.
+
+`lib.pm` prepends the values to `@INC` in a nature akin to
+
+    unshift(@INC, @{ $lib })
+
+Which is functionally similar to:
+
+    @INC = ( @{ $lib }, @INC )
+
+That is, retaining the specified order in ` @INC `.
+
 # AUTHOR
 
 Kent Fredric <kentnl@cpan.org>
