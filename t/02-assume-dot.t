@@ -43,4 +43,8 @@ $plugin and is( path( $INC[0] )->basename, path(_eg)->basename, "Injected \@INC 
   diag "Project Root: ", $tzil->root;
 };
 
+if ( $ENV{AUTOMATED_TESTING} || $ENV{TRAVIS} ) {
+  diag $_ for @{ $tzil->log_messages };
+}
+
 done_testing;
