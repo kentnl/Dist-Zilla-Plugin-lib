@@ -37,4 +37,10 @@ $plugin and isnt( $INC[0], '.', "Path injected in \@INC should not be a literal 
   diag $_ for map { "- $_ => " . ( ref $_ ? 'ref' : path($_)->is_absolute ? 'abs' : 'rel' ) } @INC;
 };
 
+$plugin and is( path( $INC[0] )->basename, path(_eg)->basename, "Injected \@INC should be a project root" ) or do {
+  diag "All \@INC + is_absolute state";
+  diag $_ for map { "- $_ => " . ( ref $_ ? 'ref' : path($_)->is_absolute ? 'abs' : 'rel' ) } @INC;
+  diag "Project Root: ", $tzil->root;
+};
+
 done_testing;
