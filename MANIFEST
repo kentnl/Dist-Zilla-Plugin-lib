@@ -21,6 +21,9 @@ examples/inc-lib/.gitignore
 examples/inc-lib/dist.ini
 examples/inc-lib/inc/Bundled/Plugin.pm
 examples/inc-lib/lib/Example/Inc/in/INC.pm
+examples/self-build/.gitignore
+examples/self-build/dist.ini
+examples/self-build/lib/Example/Self/Build.pm
 lib/Dist/Zilla/Plugin/lib.pm
 maint/perlcritic.rc.gen.pl
 misc/Changes.deps
@@ -35,6 +38,7 @@ t/00-report-prereqs.dd
 t/00-report-prereqs.t
 t/01-basic.t
 t/02-assume-dot.t
+t/03-self-build.t
 weaver.ini
 xt/author/critic.t
 xt/author/eol.t
