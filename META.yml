@@ -6,14 +6,14 @@ build_requires:
   ExtUtils::MakeMaker: '0'
   File::Spec: '0'
   Test::DZil: '0'
-  Test::More: '0.89'
+  Test::More: '0'
   constant: '0'
   perl: '5.006'
 configure_requires:
   ExtUtils::MakeMaker: '0'
   perl: '5.006'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 6.008, CPAN::Meta::Converter version 2.150010'
+generated_by: 'Dist::Zilla version 6.009, CPAN::Meta::Converter version 2.150010'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -22,7 +22,7 @@ name: Dist-Zilla-Plugin-lib
 provides:
   Dist::Zilla::Plugin::lib:
     file: lib/Dist/Zilla/Plugin/lib.pm
-    version: '0.001001'
+    version: '0.001002'
 recommends:
   Moose: '2.000'
   Path::Tiny: '0.058'
@@ -39,4 +39,4 @@ resources:
   bugtracker: https://github.com/kentnl/Dist-Zilla-Plugin-lib/issues
   homepage: https://github.com/kentnl/Dist-Zilla-Plugin-lib
   repository: https://github.com/kentnl/Dist-Zilla-Plugin-lib.git
-version: '0.001001'
+version: '0.001002'
