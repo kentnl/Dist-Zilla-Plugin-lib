@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::lib;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 # ABSTRACT: A simpler bootstrap for a more civilised world
 
@@ -76,7 +76,7 @@ Dist::Zilla::Plugin::lib - A simpler bootstrap for a more civilised world
 
 =head1 VERSION
 
-version 0.001002
+version 0.001003
 
 =head1 SYNOPSIS
 

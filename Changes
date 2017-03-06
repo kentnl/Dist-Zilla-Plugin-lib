@@ -1,5 +1,7 @@
 Release history for Dist-Zilla-Plugin-lib
 
+0.001003 2017-03-06T12:01:18Z 33c4722
+
 0.001002 2017-03-06T11:59:01Z 8ae0706
  [Bugfix]
  - Avoid issues with tests and -Ddefault_inc_excludes_dot
