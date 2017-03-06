@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::lib;
 
-our $VERSION = '0.001002';
+our $VERSION = '0.001003';
 
 # ABSTRACT: A simpler bootstrap for a more civilised world
 
